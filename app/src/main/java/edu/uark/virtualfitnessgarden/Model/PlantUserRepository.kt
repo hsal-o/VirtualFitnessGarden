@@ -14,12 +14,20 @@ class PlantUserRepository(private val plantUserDao: PlantUserDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    fun getPlantUser(id:Int):Flow<PlantUser>{
-        return plantUserDao.getPlantUser(id)
+    fun getAllPlantUsers(user_id: Int): Flow<List<PlantUser>>{
+        return plantUserDao.getAllPlantUsers(user_id)
     }
 
-    fun getPlantUserNotLive(id:Int):PlantUser{
-        return plantUserDao.getPlantUserNotLive(id)
+    fun getAllPlantUsersNotLive(user_id: Int): List<PlantUser>{
+        return plantUserDao.getAllPlantUsersNotLive(user_id)
+    }
+
+    fun getPlantUser(user_id: Int, id:Int):Flow<PlantUser>{
+        return plantUserDao.getPlantUser(user_id, id)
+    }
+
+    fun getPlantUserNotLive(user_id: Int, id:Int):PlantUser{
+        return plantUserDao.getPlantUserNotLive(user_id, id)
     }
 
     suspend fun delete(plantUser: PlantUser) {

@@ -29,7 +29,7 @@ abstract class PlantUserRoomDatabase : RoomDatabase() {
                     // Delete all content here.
                     plantUserDao.deleteAll()
 
-                    var plantUser = PlantUser(0, 0, 0)
+                    var plantUser = PlantUser(0, 0, 0, 0, 0)
                     plantUserDao.insert(plantUser)
                 }
             }
