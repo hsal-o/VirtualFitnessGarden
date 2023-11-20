@@ -13,7 +13,7 @@ class GardenGridAdapterViewModel(private val repository: PlantUserRepository, pr
 
 }
 
-class GardenGridViewModelFactory(private val repository: PlantUserRepository, private val user_id:Int) : ViewModelProvider.Factory {
+class GardenGridAdapterViewModelFactory(private val repository: PlantUserRepository, private val user_id:Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GardenGridAdapterViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
