@@ -11,11 +11,20 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PlantDao {
     //Get a single user with a given id
-    @Query("SELECT * FROM plantinfo_table WHERE id=:id" )
-    fun getPlant(id:Int): Flow<Plant>
+    @Query("SELECT * FROM plantinfo_table WHERE plant_id=:plant_id" )
+    fun getPlant(plant_id:Int): Flow<Plant>
 
-    @Query("SELECT * FROM plantinfo_table WHERE id=:id" )
-    fun getPlantNotLive(id:Int): Plant
+    @Query("SELECT * FROM plantinfo_table WHERE plant_id=:plant_id" )
+    fun getPlantNotLive(plant_id:Int): Plant
+
+    @Query("SELECT stage_1_image_id FROM plantinfo_table WHERE plant_id=:plant_id")
+    suspend fun getPlantImageStage1(plant_id: Int): Int
+
+    @Query("SELECT stage_2_image_id FROM plantinfo_table WHERE plant_id=:plant_id")
+    suspend fun getPlantImageStage2(plant_id: Int): Int
+
+    @Query("SELECT stage_3_image_id FROM plantinfo_table WHERE plant_id=:plant_id")
+    suspend fun getPlantImageStage3(plant_id: Int): Int
 
     //Insert a single User
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -10,7 +10,6 @@ class PlantUserRepository(private val plantUserDao: PlantUserDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    //val allUsers: Flow<List<User>> = userDao.getAlphabetizedTasks()
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.

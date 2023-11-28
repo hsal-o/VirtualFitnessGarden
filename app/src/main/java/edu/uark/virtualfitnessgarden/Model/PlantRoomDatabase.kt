@@ -6,6 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import edu.uark.virtualfitnessgarden.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -29,8 +30,34 @@ abstract class PlantRoomDatabase : RoomDatabase() {
                     // Delete all content here.
                     plantDao.deleteAll()
 
-                    var plant = Plant(null)
+                    // Add Sample plants
+                    var plant: Plant
+
+                    plant = Plant(R.integer.plant_sunflower_id,
+                                  R.drawable.img_plant_default_1,
+                                  R.drawable.img_plant_default_2,
+                                  R.drawable.img_plant_sunflower_3)
                     plantDao.insert(plant)
+
+                    plant = Plant(R.integer.plant_rose_id,
+                                  R.drawable.img_plant_default_1,
+                                  R.drawable.img_plant_default_2,
+                                  R.drawable.img_plant_rose_3)
+                    plantDao.insert(plant)
+
+                    plant = Plant(R.integer.plant_tulip_id,
+                                  R.drawable.img_plant_default_1,
+                                  R.drawable.img_plant_default_2,
+                                  R.drawable.img_plant_tulip_3)
+                    plantDao.insert(plant)
+
+                    plant = Plant(R.integer.plant_cactus_id,
+                                  R.drawable.img_plant_default_1,
+                                  R.drawable.img_plant_default_2,
+                                  R.drawable.img_plant_cactus_3)
+                    plantDao.insert(plant)
+
+
                 }
             }
         }

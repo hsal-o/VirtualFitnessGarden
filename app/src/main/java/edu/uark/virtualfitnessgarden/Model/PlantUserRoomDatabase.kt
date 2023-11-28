@@ -6,6 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import edu.uark.virtualfitnessgarden.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -20,7 +21,6 @@ abstract class PlantUserRoomDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            Log.d("Database", "Here1")
 
             INSTANCE?.let { database ->
                 scope.launch {
@@ -29,8 +29,24 @@ abstract class PlantUserRoomDatabase : RoomDatabase() {
                     // Delete all content here.
                     plantUserDao.deleteAll()
 
-                    var plantUser = PlantUser(0, 0, 0, 0, 0)
+                    var plantUser = PlantUser(R.integer.plant_sunflower_id, 0, 0, 1, 3)
                     plantUserDao.insert(plantUser)
+
+                    plantUser = PlantUser(R.integer.plant_tulip_id, 0, 1, 0, 3)
+                    plantUserDao.insert(plantUser)
+
+                    plantUser = PlantUser(R.integer.plant_rose_id, 0, 2, 2, 3)
+                    plantUserDao.insert(plantUser)
+
+                    plantUser = PlantUser(R.integer.plant_cactus_id, 0, 3, 2, 3)
+                    plantUserDao.insert(plantUser)
+
+                    plantUser = PlantUser(R.integer.plant_rose_id, 0, 4, 2, 1)
+                    plantUserDao.insert(plantUser)
+
+                    plantUser = PlantUser(R.integer.plant_sunflower_id, 0, 5, 1, 2)
+                    plantUserDao.insert(plantUser)
+
                 }
             }
         }

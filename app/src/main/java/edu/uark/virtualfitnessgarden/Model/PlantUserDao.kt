@@ -24,6 +24,7 @@ interface PlantUserDao {
     @Query("SELECT * FROM plantUserinfo_table WHERE user_id=:user_id AND id=:id")
     fun getPlantUserNotLive(user_id: Int, id: Int): PlantUser
 
+
     //Insert a single User
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(plantUser: PlantUser)
