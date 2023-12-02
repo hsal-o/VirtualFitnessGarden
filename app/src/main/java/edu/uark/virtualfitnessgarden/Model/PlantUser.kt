@@ -10,7 +10,7 @@ class PlantUser (
     @ColumnInfo(name = "user_id") var user_id: Int,
     @ColumnInfo(name = "id") var id: Int,
     @ColumnInfo(name = "status") var status: Int, // status of plant, 0: bad, 1: okay, 2: good
-    @ColumnInfo(name = "currentStage") val currentStage: Int // current growth stage of plant from 0 - 2
+    @ColumnInfo(name = "currentStage") var currentStage: Int // current growth stage of plant from 0 - 2
 
 
 )

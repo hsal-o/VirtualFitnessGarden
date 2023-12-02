@@ -11,11 +11,26 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
     //Get a single user with a given id
-    @Query("SELECT * FROM userinfo_table WHERE id=:id" )
-    fun getUser(id:Int): Flow<User>
+    @Query("SELECT * FROM userinfo_table WHERE user_id=:user_id" )
+    fun getUser(user_id:Int): Flow<User>
 
-    @Query("SELECT * FROM userinfo_table WHERE id=:id" )
-    fun getUserNotLive(id:Int): User
+    @Query("SELECT * FROM userinfo_table WHERE user_id=:user_id" )
+    fun getUserNotLive(user_id:Int): User
+
+    @Query("SELECT userName FROM userinfo_table WHERE user_id=:user_id")
+    fun getUserName(user_id:Int): String
+
+    @Query("SELECT stepCount FROM userinfo_table WHERE user_id=:user_id")
+    fun getUserStepCount(user_id:Int): Int
+
+    @Query("SELECT fertilizerCount FROM userinfo_table WHERE user_id=:user_id")
+    fun getUserFertilizerCount(user_id: Int): Int
+
+    @Query("SELECT COUNT(*) FROM userinfo_table WHERE user_id = :user_id AND fertilizerCount > 0")
+    fun hasFertilizer(user_id: Int): Boolean
+
+    @Query("UPDATE userinfo_table SET fertilizerCount = fertilizerCount - 1 WHERE user_id = :user_id")
+    suspend fun decrementFertilizerCount(user_id: Int)
 
     //Insert a single User
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -28,7 +43,7 @@ interface UserDao {
     @Delete
     suspend fun delete(user: User)
 
-    //Update a single task
+    //Update a single user
     @Update
     suspend fun update(user: User):Int
 }

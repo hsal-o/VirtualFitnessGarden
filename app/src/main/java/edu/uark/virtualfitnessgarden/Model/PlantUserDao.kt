@@ -24,6 +24,11 @@ interface PlantUserDao {
     @Query("SELECT * FROM plantUserinfo_table WHERE user_id=:user_id AND id=:id")
     fun getPlantUserNotLive(user_id: Int, id: Int): PlantUser
 
+    @Query("SELECT COUNT(*) FROM plantUserinfo_table WHERE user_id = :user_id AND id = :id AND status >= 2")
+    fun isWatered(user_id: Int, id: Int): Boolean
+
+    @Query("SELECT COUNT(*) FROM plantUserinfo_table WHERE user_id = :user_id AND id = :id AND currentStage >= 3")
+    fun isMaxStage(user_id: Int, id: Int): Boolean
 
     //Insert a single User
     @Insert(onConflict = OnConflictStrategy.IGNORE)

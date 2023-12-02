@@ -21,7 +21,7 @@ abstract class PlantRoomDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            Log.d("Database", "Here1")
+            Log.d("Database", "PlantRoomDatabase.onCreate() // INSTANCE: $INSTANCE")
 
             INSTANCE?.let { database ->
                 scope.launch {

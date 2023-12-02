@@ -5,6 +5,8 @@ import edu.uark.virtualfitnessgarden.Model.PlantRepository
 import edu.uark.virtualfitnessgarden.Model.PlantRoomDatabase
 import edu.uark.virtualfitnessgarden.Model.PlantUserRepository
 import edu.uark.virtualfitnessgarden.Model.PlantUserRoomDatabase
+import edu.uark.virtualfitnessgarden.Model.UserRepository
+import edu.uark.virtualfitnessgarden.Model.UserRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
@@ -18,4 +20,7 @@ class VirtualFitnessGardenApplication : Application() {
 
     val plant_database by lazy { PlantRoomDatabase.getDatabase(this,applicationScope) }
     val plant_respository by lazy { PlantRepository(plant_database.plantDao())}
+
+    val user_database by lazy { UserRoomDatabase.getDatabase(this,applicationScope) }
+    val user_repository by lazy { UserRepository(user_database.userDao()) }
 }

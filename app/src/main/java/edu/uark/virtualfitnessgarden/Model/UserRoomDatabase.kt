@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 @Database(entities = arrayOf(User::class), version = 1, exportSchema = false)
 abstract class UserRoomDatabase : RoomDatabase() {
 
-    abstract fun taskDao(): UserDao
+    abstract fun userDao(): UserDao
 
     private class TaskDatabaseCallback(
         private val scope: CoroutineScope
@@ -20,17 +20,25 @@ abstract class UserRoomDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            Log.d("Database", "Here1")
+            Log.d("Database", "UserRoomDatabase.onCreate() // INSTANCE: $INSTANCE")
 
             INSTANCE?.let { database ->
                 scope.launch {
-                    val taskDao = database.taskDao()
+                    val userDao = database.userDao()
 
                     // Delete all content here.
-                    taskDao.deleteAll()
+                    userDao.deleteAll()
 
-                    var user = User(null, "username123")
-                    taskDao.insert(user)
+                    var user = User(0, "kk101", 5410, fertilizerCount = 11)
+                    userDao.insert(user)
+
+                    Log.d("DEBUG", ">>>>>>>>>>> added user ${user.userName} with id ${user.user_id}")
+
+
+                    user = User(1, "hsal-o", 2508)
+                    userDao.insert(user)
+
+                    Log.d("DEBUG", ">>>>>>>>>>> added user ${user.userName} with id ${user.user_id}")
                 }
             }
         }
@@ -50,10 +58,11 @@ abstract class UserRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     UserRoomDatabase::class.java,
-                    "task_database"
+                    "userinfo_table"
                 )
                     .addCallback(TaskDatabaseCallback(scope))
                     .build()
+
                 INSTANCE = instance
                 // return instance
                 instance

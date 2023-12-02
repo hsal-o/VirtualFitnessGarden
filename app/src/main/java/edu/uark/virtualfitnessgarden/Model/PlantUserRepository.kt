@@ -29,6 +29,14 @@ class PlantUserRepository(private val plantUserDao: PlantUserDao) {
         return plantUserDao.getPlantUserNotLive(user_id, id)
     }
 
+    fun isWatered(user_id: Int, id: Int): Boolean{
+        return plantUserDao.isWatered(user_id, id)
+    }
+
+    fun isMaxStage(user_id: Int, id: Int): Boolean{
+        return plantUserDao.isMaxStage(user_id, id)
+    }
+
     suspend fun delete(plantUser: PlantUser) {
         plantUserDao.delete(plantUser)
     }
@@ -46,10 +54,13 @@ class PlantUserRepository(private val plantUserDao: PlantUserDao) {
         //If you don't run this in a scope that is still active
         //Then the call won't complete
         //Thread.sleep(5000)
+
+        Log.d("Database", "PlantUserRepository.insert() // Before ")
+
         Thread.sleep(2500)
         plantUserDao.insert(plantUser)
 
-        //Log.d("DEBUG", "Added plant " + plant.plantName)
+        Log.d("Database", "\tPlantUserRepository.insert() // After ")
     }
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to

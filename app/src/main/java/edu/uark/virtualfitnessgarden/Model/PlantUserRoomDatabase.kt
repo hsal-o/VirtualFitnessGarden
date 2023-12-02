@@ -21,6 +21,9 @@ abstract class PlantUserRoomDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
+            Log.d("Database", "PlantUserRoomDatabase.onCreate()")
+
+            Log.d("Database", "PlantUserRoomDatabase.onCreate() // INSTANCE: $INSTANCE")
 
             INSTANCE?.let { database ->
                 scope.launch {
@@ -29,26 +32,58 @@ abstract class PlantUserRoomDatabase : RoomDatabase() {
                     // Delete all content here.
                     plantUserDao.deleteAll()
 
-                    var plantUser = PlantUser(R.integer.plant_sunflower_id, 0, 0, 1, 3)
-                    plantUserDao.insert(plantUser)
-
-                    plantUser = PlantUser(R.integer.plant_tulip_id, 0, 1, 0, 3)
-                    plantUserDao.insert(plantUser)
-
-                    plantUser = PlantUser(R.integer.plant_rose_id, 0, 2, 2, 3)
-                    plantUserDao.insert(plantUser)
-
-                    plantUser = PlantUser(R.integer.plant_cactus_id, 0, 3, 2, 3)
-                    plantUserDao.insert(plantUser)
-
-                    plantUser = PlantUser(R.integer.plant_rose_id, 0, 4, 2, 1)
-                    plantUserDao.insert(plantUser)
-
-                    plantUser = PlantUser(R.integer.plant_sunflower_id, 0, 5, 1, 2)
-                    plantUserDao.insert(plantUser)
-
+                    addPlantsUser0(plantUserDao)
+                    addPlantsUser1(plantUserDao)
                 }
             }
+        }
+
+        suspend fun addPlantsUser0(plantUserDao: PlantUserDao){
+            val user_id = 0
+            var plantUser = PlantUser(R.integer.plant_sunflower_id, user_id, 0, 1, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_tulip_id, user_id, 1, 0, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_rose_id, user_id, 2, 2, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 3, 2, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_rose_id, user_id, 4, 2, 1)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_sunflower_id, user_id, 5, 1, 2)
+            plantUserDao.insert(plantUser)
+        }
+
+        suspend fun addPlantsUser1(plantUserDao: PlantUserDao){
+            val user_id = 1
+            var plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 0, 1, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 1, 0, 2)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 2, 2, 2)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 3, 2, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 4, 2, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 5, 1, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 6, 1, 3)
+            plantUserDao.insert(plantUser)
+
+            plantUser = PlantUser(R.integer.plant_cactus_id, user_id, 7, 1, 2)
+            plantUserDao.insert(plantUser)
         }
     }
 
