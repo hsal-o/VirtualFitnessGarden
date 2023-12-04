@@ -26,11 +26,17 @@ interface UserDao {
     @Query("SELECT fertilizerCount FROM userinfo_table WHERE user_id=:user_id")
     fun getUserFertilizerCount(user_id: Int): Int
 
-    @Query("SELECT COUNT(*) FROM userinfo_table WHERE user_id = :user_id AND fertilizerCount > 0")
+    @Query("SELECT COUNT(*) FROM userinfo_table WHERE user_id =:user_id AND fertilizerCount > 0")
     fun hasFertilizer(user_id: Int): Boolean
 
-    @Query("UPDATE userinfo_table SET fertilizerCount = fertilizerCount - 1 WHERE user_id = :user_id")
+    @Query("SELECT EXISTS (SELECT 1 FROM userinfo_table WHERE user_id=:user_id AND coinCount >= :amount LIMIT 1)")
+    suspend fun canAfford(user_id: Int, amount: Int): Boolean
+
+    @Query("UPDATE userinfo_table SET fertilizerCount = fertilizerCount - 1 WHERE user_id=:user_id")
     suspend fun decrementFertilizerCount(user_id: Int)
+
+    @Query("UPDATE userinfo_table SET fertilizerCount = fertilizerCount + 1, coinCount = coinCount - :amount WHERE user_id=:user_id")
+    suspend fun buyFertilizer(user_id: Int, amount: Int)
 
     //Insert a single User
     @Insert(onConflict = OnConflictStrategy.IGNORE)

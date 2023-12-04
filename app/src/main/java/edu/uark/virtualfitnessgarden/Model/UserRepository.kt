@@ -47,8 +47,16 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.hasFertilizer(user_id)
     }
 
+    suspend fun canAfford(user_id: Int, amount: Int): Boolean{
+        return userDao.canAfford(user_id, amount)
+    }
+
     suspend fun decrementFertilizerCount(user_id: Int){
         userDao.decrementFertilizerCount(user_id)
+    }
+
+    suspend fun buyFertilizer(user_id: Int, amount: Int){
+        userDao.buyFertilizer(user_id, amount)
     }
 
     suspend fun delete(user: User) {

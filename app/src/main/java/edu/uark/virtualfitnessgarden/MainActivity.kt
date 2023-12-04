@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
             userPlants.let{
                 adapter.submitList(it)
             }
-
         }
 
         initializeButtons()
@@ -76,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             // We are not in shop activity
             button_shop.setOnClickListener{
                 val intent = Intent(this, ShopActivity::class.java)
+                intent.putExtra("user_id", user_id)
                 finish()
                 startActivity(intent)
             }
@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             // We are not in home main activity
             button_home.setOnClickListener{
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("user_id", user_id)
                 finish()
                 startActivity(intent)
             }
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             // We are not in home main activity
             button_friend.setOnClickListener{
                 val intent = Intent(this, FriendActivity::class.java)
+                intent.putExtra("user_id", user_id)
                 finish()
                 startActivity(intent)
             }
