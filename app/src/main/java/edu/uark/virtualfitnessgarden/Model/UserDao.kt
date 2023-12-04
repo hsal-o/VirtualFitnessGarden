@@ -38,6 +38,9 @@ interface UserDao {
     @Query("UPDATE userinfo_table SET fertilizerCount = fertilizerCount + 1, coinCount = coinCount - :amount WHERE user_id=:user_id")
     suspend fun buyFertilizer(user_id: Int, amount: Int)
 
+    @Query("UPDATE userinfo_table SET coinCount = coinCount - :amount WHERE user_id=:user_id")
+    suspend fun spendCoins(user_id: Int, amount: Int)
+
     //Insert a single User
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(user: User)

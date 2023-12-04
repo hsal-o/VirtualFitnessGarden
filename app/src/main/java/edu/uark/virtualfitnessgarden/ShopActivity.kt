@@ -50,9 +50,27 @@ class ShopActivity : AppCompatActivity() {
             // Handle item click here
             val clickedItem: ShopItem = plantShopItemAdapter.getItemAtPosition(position)
 
-            buyPlant(clickedItem.plant_id, clickedItem.price)
 
-            Toast.makeText(this, "Clicked on ShopItem with price ${clickedItem.price}", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(this)
+
+            builder.setTitle("Confirmation")
+                .setMessage("Are you sure you want to buy?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    // Handle the positive button click (user confirmed)
+
+                    buyPlant(user_id, clickedItem.plant_id, clickedItem.price)
+
+                    dialog.dismiss() // You can dismiss the dialog here or perform additional actions
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // Handle the negative button click (user canceled)
+                    dialog.dismiss() // You can dismiss the dialog here or perform additional actions
+                }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+            //Toast.makeText(this, "Clicked on ShopItem with price ${clickedItem.price}", Toast.LENGTH_SHORT).show()
         }
 
         recyclerView_plantShop.adapter = plantShopItemAdapter
@@ -119,8 +137,12 @@ class ShopActivity : AppCompatActivity() {
 
     }
 
-    fun buyPlant(plant_id: Int, price: Int){
-
+    fun buyPlant(user_id: Int, plant_id: Int, price: Int){
+        CoroutineScope(Dispatchers.Main).launch {
+            if (!shopActivityViewModel.buyPlantForUser(user_id, plant_id, price)) {
+                showCannotAffordDialog()
+            }
+        }
     }
 
     fun buyFertilizer(price: Int) {

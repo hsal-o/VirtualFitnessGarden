@@ -23,6 +23,23 @@ class ShopActivityViewModel(private val plantUserRepository: PlantUserRepository
         return false
     }
 
+    suspend fun buyPlantForUser(user_id: Int, plant_id: Int, price: Int): Boolean {
+        if (canAfford(user_id, price)) {
+            //plantUserRepository.addPlant(user_id, plant_id, price)
+            val nextId = getNextPlantUserId(user_id)
+            val newPlant = PlantUser(plant_id, user_id, nextId, 0, 1)
+            plantUserRepository.insert(newPlant)
+            userRepository.spendCoins(user_id, price)
+
+            return true
+        }
+        return false
+    }
+
+    suspend fun getNextPlantUserId(user_id: Int): Int{
+        return plantUserRepository.getNextPlantUserId(user_id)
+    }
+
     suspend fun canAfford(user_id: Int, amount: Int): Boolean {
         return userRepository.canAfford(user_id, amount)
     }

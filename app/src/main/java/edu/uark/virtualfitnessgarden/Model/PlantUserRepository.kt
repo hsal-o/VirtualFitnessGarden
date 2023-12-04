@@ -29,6 +29,10 @@ class PlantUserRepository(private val plantUserDao: PlantUserDao) {
         return plantUserDao.getPlantUserNotLive(user_id, id)
     }
 
+    suspend fun getNextPlantUserId(user_id: Int): Int{
+        return plantUserDao.getNextPlantUserId(user_id)
+    }
+
     fun isWatered(user_id: Int, id: Int): Boolean{
         return plantUserDao.isWatered(user_id, id)
     }
@@ -37,11 +41,14 @@ class PlantUserRepository(private val plantUserDao: PlantUserDao) {
         return plantUserDao.isMaxStage(user_id, id)
     }
 
+
+//    suspend fun buyPlant(user_id: Int, plant_id: Int, amount: Int){
+//        plantUserDao.buyPlant(user_id, plant_id, amount)
+//    }
+
     suspend fun delete(plantUser: PlantUser) {
         plantUserDao.delete(plantUser)
     }
-
-
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work

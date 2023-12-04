@@ -55,6 +55,10 @@ class UserRepository(private val userDao: UserDao) {
         userDao.decrementFertilizerCount(user_id)
     }
 
+    suspend fun spendCoins(user_id: Int, amount: Int){
+        userDao.spendCoins(user_id, amount)
+    }
+
     suspend fun buyFertilizer(user_id: Int, amount: Int){
         userDao.buyFertilizer(user_id, amount)
     }

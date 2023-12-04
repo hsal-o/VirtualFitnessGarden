@@ -24,6 +24,9 @@ interface PlantUserDao {
     @Query("SELECT * FROM plantUserinfo_table WHERE user_id=:user_id AND id=:id")
     fun getPlantUserNotLive(user_id: Int, id: Int): PlantUser
 
+    @Query("SELECT COALESCE(MAX(id), 0) + 1 AS next_id FROM plantUserinfo_table WHERE user_id = :user_id")
+    suspend fun getNextPlantUserId(user_id: Int): Int
+
     @Query("SELECT COUNT(*) FROM plantUserinfo_table WHERE user_id = :user_id AND id = :id AND status >= 2")
     fun isWatered(user_id: Int, id: Int): Boolean
 
@@ -37,6 +40,10 @@ interface PlantUserDao {
     // Delete all users
     @Query("DELETE FROM plantUserinfo_table")
     suspend fun deleteAll()
+
+//    @Query("INSERT INTO plantUserinfo_table (user_id, plant_id, id)\n" +
+//            "VALUES (:user_id, :plant_id, (SELECT COALESCE(MAX(id), 0) + 1 FROM plantUserinfo_table WHERE user_id = :user_id));\n")
+//    suspend fun buyFertilizer(user_id: Int, amount: Int)
 
     @Delete
     suspend fun delete(plantUser: PlantUser)
