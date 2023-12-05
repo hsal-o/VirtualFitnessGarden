@@ -44,31 +44,6 @@ class ShopActivityViewModel(private val plantUserRepository: PlantUserRepository
         return userRepository.canAfford(user_id, amount)
     }
 
-//    fun buyFertilizerForUser(user_id: Int, price: Int): Boolean{
-//        var result = false;
-//        viewModelScope.launch {
-//            if(user_id != null) {
-//                if (canAfford(user_id, price)) {
-////                    curUser.fertilizerCount += 1
-////                    curUser.coinCount -= price
-//                    userRepository.buyFertilizer(user_id, price)
-//                    result = true
-//                }
-//            }
-//        }
-//
-//        return result
-//    }
-//
-//    fun canAfford(user_id: Int, amount: Int): Boolean{
-//        var result = false
-//        viewModelScope.launch {
-//            userRepository.canAfford(user_id, amount)
-//            result = userRepository.canAfford(user_id, amount)
-//        }
-//        return result
-//    }
-
 }
 
 class ShopActivityViewModelFactory(private val plantUserRepository: PlantUserRepository, private val userRepository: UserRepository, private val user_id: Int) : ViewModelProvider.Factory {

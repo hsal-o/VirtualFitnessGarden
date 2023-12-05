@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import edu.uark.virtualfitnessgarden.Model.ShopItem
 import edu.uark.virtualfitnessgarden.Util.ShopItemAdapter
@@ -50,7 +51,6 @@ class ShopActivity : AppCompatActivity() {
             // Handle item click here
             val clickedItem: ShopItem = plantShopItemAdapter.getItemAtPosition(position)
 
-
             val builder = AlertDialog.Builder(this)
 
             builder.setTitle("Confirmation")
@@ -75,13 +75,16 @@ class ShopActivity : AppCompatActivity() {
 
         recyclerView_plantShop.adapter = plantShopItemAdapter
 
-        var newShopItem = ShopItem(R.drawable.img_plant_rose_3, 300, isPlant = true, plant_id = R.integer.plant_rose_id)
+        val dividerItemDecoration = DividerItemDecoration(recyclerView_plantShop.getContext(), DividerItemDecoration.HORIZONTAL)
+        recyclerView_plantShop.addItemDecoration(dividerItemDecoration)
+
+        var newShopItem = ShopItem(R.drawable.img_plant_rose_3, 7500, isPlant = true, plant_id = R.integer.plant_rose_id)
         plantShopItemAdapter.addShopItem(newShopItem)
 
-        newShopItem = ShopItem(R.drawable.img_plant_tulip_3, 200, isPlant = true, plant_id = R.integer.plant_tulip_id)
+        newShopItem = ShopItem(R.drawable.img_plant_tulip_3, 3000, isPlant = true, plant_id = R.integer.plant_tulip_id)
         plantShopItemAdapter.addShopItem(newShopItem)
 
-        newShopItem = ShopItem(R.drawable.img_plant_cactus_3, 250, isPlant = true, plant_id = R.integer.plant_cactus_id)
+        newShopItem = ShopItem(R.drawable.img_plant_cactus_3, 1000, isPlant = true, plant_id = R.integer.plant_cactus_id)
         plantShopItemAdapter.addShopItem(newShopItem)
     }
 
